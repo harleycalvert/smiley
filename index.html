@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>JavaScript Matching Game</title>
+
+	        <style>
+
+	        	body {
+	        		background-color: deeppink;
+	        	}
+
+		        img {
+		        	position: absolute;
+		        }
+
+			    div {
+			      position: absolute;
+			      width: 500px;
+			      height: 500px;
+			    }
+
+			    #leftSide {
+			      float: left;
+			    }
+
+			    #rightSide {
+			      float: right;
+			      left: 500px;
+			      border-left: 1px solid black
+			    }
+
+			</style>
+
+    </head>
+
+    <body id="body" onload="start()">
+
+    	<h1>Matching Game</h1>
+    	<p>Click on the extra smiling face on the left.</p>
+
+
+        <script type="text/javascript">
+
+        	function random_image() {
+        		var smile = document.createElement("img");
+        		var random_top = Math.floor(Math.random()*400);
+				var random_left = Math.floor(Math.random()*400);
+				smile.setAttribute('src', 'smile.png');
+				smile.setAttribute('alt', 'Smiley face');
+  				smile.setAttribute('id', j);
+  				smile.setAttribute("onclick", "eval(id)");
+  				document.getElementById('leftSide').appendChild(smile);
+  				document.getElementById(j).style.top = random_top + "px";
+				document.getElementById(j).style.left = random_left + "px";
+        	}
+
+	        function clone() {
+	        	var the_node = document.getElementById("leftSide").lastChild;
+	        	var the_clone = the_node.cloneNode(true);	        	
+	        	document.getElementById("rightSide").appendChild(the_clone);
+	        }
+
+	        //j is the id and the total number of smileys 
+			var j=1;
+	        function add_five() {	
+	        	//add five more, j is the id and the total number of smileys
+	        	for (i=1; i<6; i++, j++) {
+	        		random_image();
+	        		clone();
+	        	}  
+	        }
+
+	        function move_id_5() {
+	        	//just keep moving smiley with id number 5 and keep it at the front / on top
+	        	//this is the one we search for when playing the game
+	        	var random_top = Math.floor(Math.random()*400);
+				var random_left = Math.floor(Math.random()*400);
+	        	document.getElementById("5").style.top = random_top + "px";
+				document.getElementById("5").style.left = random_left + "px";  
+				document.getElementById("5").style.zIndex = 1;
+	        }
+
+	        function start() {
+	        	//add 4 cloning them, then add number 5, the one we search for
+	        	for (i=1; i<5; i++, j++) {
+	        		random_image();
+	        		clone();
+	        	} 
+	        	random_image();
+	        	j++;
+	        }
+
+
+	        function eval(j) {
+	        	if (j == 5) {
+	        		add_five();
+	        		move_id_5();
+	        	}
+	        	else {
+	        		alert("Game Over!");
+	        		window.location.reload(false);
+	        	}
+	        }
+
+
+		</script>
+
+		
+		<div id="leftSide"></div>
+		<div id="rightSide"></div>
+		
+	    
+	    
+
+        
+    </body>
+
+
+
+</html>
